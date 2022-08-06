@@ -3,24 +3,26 @@ package com.project.twittersimulation;
 import javafx.application.Application;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Scene;
-import javafx.scene.layout.StackPane;
 import javafx.stage.Stage;
 import java.io.IOException;
 
 
 public class App extends Application {
 
+    public static Scene scene;
+    public static Stage stage;
+
 
     @Override
     public void start(Stage stage) throws IOException {
         FXMLLoader fxmlLoader = new FXMLLoader(App.class.getResource("login.fxml"));
-        Scene scene = new Scene(fxmlLoader.load(), 800, 600);
+        scene = new Scene(fxmlLoader.load(), 1200, 800);
         stage.setTitle("Hello!");
-        //stage.setFullScreen(true);
         stage.setScene(scene);
-        stage.setWidth(800);
-        stage.setHeight(600);
+        stage.setWidth(1200);
+        stage.setHeight(800);
 
+        App.stage = stage;
 
         stage.widthProperty().addListener((obs, oldVal, newVal) -> {
 

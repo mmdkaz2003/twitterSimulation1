@@ -15,10 +15,13 @@ import javafx.stage.Stage;
 import java.io.IOException;
 import java.sql.*;
 
+import static com.project.twittersimulation.App.stage;
+import static com.project.twittersimulation.App.scene;
+
+
 public class ForgotPassword {
 
-    private Stage stage;
-    private Scene scene;
+
 
 
     @FXML
@@ -47,7 +50,7 @@ public class ForgotPassword {
         Parent root = FXMLLoader.load(getClass().getResource("login.fxml"));
         stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
         stage.setTitle("welcome to rouzif 25 ");
-        scene = new Scene(root);
+        scene.setRoot(root);
         stage.setScene(scene);
         stage.show();
     }
@@ -119,7 +122,7 @@ public class ForgotPassword {
         stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
         stage.setTitle("change password of " + user);
         ChangePassword.userName = user;
-        scene = new Scene(root);
+        scene.setRoot(root);
         stage.setScene(scene);
         stage.show();
     }

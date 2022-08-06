@@ -4,14 +4,21 @@ import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
+import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
+import javafx.scene.Node;
+import javafx.scene.Parent;
+import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
 import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.input.MouseEvent;
+import javafx.scene.layout.Pane;
+import javafx.stage.Stage;
 
+import java.io.IOException;
 import java.sql.*;
 import java.net.URL;
 import java.sql.Connection;
@@ -21,7 +28,14 @@ import java.sql.Statement;
 import java.util.ArrayList;
 import java.util.ResourceBundle;
 
+import static com.project.twittersimulation.App.scene;
+import static com.project.twittersimulation.App.stage;
+
+
 public class Profile implements Initializable {
+
+
+
 
 
     @FXML
@@ -51,10 +65,6 @@ public class Profile implements Initializable {
     @FXML
     private Label user;
 
-    @FXML
-    void Edit(ActionEvent event) {
-
-    }
 
 
     @FXML
@@ -90,9 +100,54 @@ public class Profile implements Initializable {
     public void followingsPost(MouseEvent mouseEvent) {
     }
 
+
     @FXML
     public void logout(MouseEvent mouseEvent) {
     }
+
+
+    @FXML
+    void showSelectedProf(MouseEvent event) throws IOException {
+        Followings following = followingsTable.getSelectionModel().getSelectedItem();
+        Followers followers = followersTable.getSelectionModel().getSelectedItem();
+
+
+        if (following != null){
+            ShowProfile.userName = following.getFollowingName();
+
+            Pane root = FXMLLoader.load(getClass().getResource("showProfile.fxml"));
+            stage.setTitle(ShowProfile.userName + " profile");
+            scene.setRoot(root);
+
+        }
+        else if (followers != null){
+            ShowProfile.userName = followers.getFollowerName();
+            Pane pane = null;
+            pane = FXMLLoader.load(getClass().getResource("showProfile.fxml"));
+            stage.setTitle(ShowProfile.userName + " profile");
+            App.scene.setRoot(pane);
+
+        }
+
+
+    }
+
+    @FXML
+    public void SeeMyPost(MouseEvent mouseEvent) throws IOException {
+        Pane pane = null;
+        pane = FXMLLoader.load(getClass().getResource("myPosts.fxml"));
+        stage.setTitle("my posts");
+        scene.setRoot(pane);
+    }
+
+    @FXML
+    public void Edit(MouseEvent mouseEvent) throws IOException {
+        Pane pane = null;
+        pane = FXMLLoader.load(getClass().getResource("editProfile.fxml"));
+        stage.setTitle("edit profile");
+        scene.setRoot(pane);
+    }
+
 
 
     private ObservableList<Followers> FollowersList (ArrayList<Followers> temp) {
@@ -111,7 +166,12 @@ public class Profile implements Initializable {
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
 
+        Followings.followingsList.clear();
+        Followers.followersList.clear();
+
         user.setText(Login.userName);
+        birth.setText("birth day : " + Login.birthDay);
+
 
 
 
@@ -131,16 +191,26 @@ public class Profile implements Initializable {
 
 
             Connection conn = DriverManager.getConnection(DB_url, username, Password);
+            Statement statement = conn.createStatement();
             Statement statement1 = conn.createStatement();
             Statement statement2 = conn.createStatement();
 
 
+            String sql = "SELECT COUNT(sender) FROM posts WHERE sender = '" + Login.userName + "'";
             String sql1 = "SELECT " + Login.userName + " FROM followings";
             String sql2 = "SELECT " + Login.userName + " FROM followers";
 
+
+            ResultSet resultSet = statement.executeQuery(sql);
             ResultSet resultSet1 = statement1.executeQuery(sql1);
             ResultSet resultSet2 = statement2.executeQuery(sql2);
 
+            if (resultSet.next()){
+                postCount.setText("number of post : " + resultSet.getInt(1));
+            }
+            else {
+                System.out.println("ridi");
+            }
             while (resultSet1.next()) {
                 if (resultSet1.getString(Login.userName) != null) {
                     Followers follower = new Followers(resultSet1.getString(Login.userName));
@@ -170,4 +240,5 @@ public class Profile implements Initializable {
         }
     }
 
-    }
+
+}

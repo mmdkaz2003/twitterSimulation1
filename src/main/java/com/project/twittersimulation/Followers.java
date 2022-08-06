@@ -9,6 +9,11 @@ public class Followers {
 
     public static ArrayList<String> followersList =  new ArrayList<>();
 
+    @Override
+    public String toString() {
+        return this.followerName;
+    }
+
     public String getFollowerName() {
         return followerName;
     }

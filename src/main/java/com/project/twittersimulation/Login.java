@@ -16,18 +16,21 @@ import javafx.scene.control.Label;
 import javafx.scene.control.PasswordField;
 import javafx.scene.control.TextField;
 import javafx.scene.control.TextField;
+import javafx.scene.layout.Pane;
 import javafx.stage.Stage;
 
 import java.util.ArrayList;
 import java.util.ResourceBundle;
 
-public class Login {
 
-    private Stage stage;
-    private Scene scene;
+public class Login {
 
     public static String userName;
     public static String password;
+    public static String birthDay;
+    public static String name;
+    public static AccountType accountType;
+    public static BusinessType businessType;
 
 
     @FXML
@@ -73,7 +76,7 @@ public class Login {
             Connection conn = DriverManager.getConnection(DB_url, username, Password);
             Statement statement = conn.createStatement();
 
-            String sql = "SELECT username,password FROM personalInformation" ;
+            String sql = "SELECT * FROM personalInformation" ;
             ResultSet resultSet = statement.executeQuery(sql);
 
             String userName = usernameField.getText().toString().trim();
@@ -97,9 +100,16 @@ public class Login {
                     if (temp1.equals(userName)) {
                         exist = true;
                         if (temp2.equals(passWord)) {
+
                             wrongUser.setText("Login successfully ");
+
                             Login.userName = userName;
                             password = passWord;
+                            birthDay = resultSet.getString("birthday").trim();
+                            accountType = AccountType.valueOf(resultSet.getString("accounttype").trim());
+                            if (accountType.equals(AccountType.BusinessAccount)){
+                                businessType = BusinessType.valueOf(resultSet.getString("businessType").trim());
+                            }
                             GoToMenu(event);
 
                         } else {
@@ -128,23 +138,19 @@ public class Login {
 
 
     public void Forgot(ActionEvent event) throws IOException {
-        Parent root = FXMLLoader.load(getClass().getResource("forgotPassword.fxml"));
-        stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
-        stage.setTitle("forgot password");
-        scene = new Scene(root);
-        stage.setScene(scene);
-        stage.show();
+        Pane root = FXMLLoader.load(getClass().getResource("forgotPassword.fxml"));
+        App.stage.setTitle("forgot password");
+        App.scene.setRoot(root);
     }
 
     public void GoToMenu(ActionEvent event) throws IOException{
-        Parent root = FXMLLoader.load(getClass().getResource("Menu.fxml"));
-        stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
-        stage.setTitle("welcome " + usernameField.getText().toString().trim());
-        stage.setHeight(800);
-        stage.setWidth(1200);
-        scene = new Scene(root);
-        stage.setScene(scene);
-        stage.show();
+        Pane root = FXMLLoader.load(getClass().getResource("Menu.fxml"));
+
+        App.stage.setTitle("welcome " + usernameField.getText().toString().trim());
+        App.stage.setHeight(800);
+        App.stage.setWidth(1200);
+        App.scene.setRoot(root);
+        App.stage.setScene(App.scene);
     }
 
 

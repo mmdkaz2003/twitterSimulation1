@@ -6,6 +6,10 @@ public class Followings {
 
     private String followingName;
 
+    @Override
+    public String toString() {
+        return this.followingName;
+    }
 
     public String getFollowingName() {
         return followingName;

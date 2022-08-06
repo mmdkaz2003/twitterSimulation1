@@ -163,17 +163,17 @@
                   </HBox>
                   <HBox alignment="CENTER_RIGHT" prefHeight="100.0" prefWidth="200.0" GridPane.rowIndex="1">
                      <children>
-                        <Button fx:id="SeePosts" mnemonicParsing="false" prefHeight="26.0" prefWidth="89.0" text="see my posts" />
+                        <Button fx:id="SeePosts" mnemonicParsing="false" onMouseClicked="#SeeMyPost" prefHeight="26.0" prefWidth="89.0" text="see my posts" />
                         <HBox alignment="CENTER_RIGHT" prefHeight="50.0" prefWidth="277.0">
                            <children>
-                              <Button fx:id="showProfile" mnemonicParsing="false" prefHeight="26.0" prefWidth="139.0" text=" show selected profile" />
+                              <Button fx:id="showProfile" mnemonicParsing="false" onMouseClicked="#showSelectedProf" prefHeight="26.0" prefWidth="139.0" text=" show selected profile" />
                            </children>
                         </HBox>
                      </children>
                   </HBox>
                   <HBox alignment="CENTER" prefHeight="100.0" prefWidth="200.0" GridPane.columnIndex="1" GridPane.rowIndex="1">
                      <children>
-                        <Button mnemonicParsing="false" onAction="#Edit" prefHeight="26.0" prefWidth="92.0" text="edit profile">
+                        <Button mnemonicParsing="false" onMouseClicked="#Edit" prefHeight="26.0" prefWidth="92.0" text="edit profile">
                            <HBox.margin>
                               <Insets left="140.0" />
                            </HBox.margin>
@@ -203,7 +203,7 @@
                   </HBox>
                   <HBox alignment="CENTER" prefHeight="100.0" prefWidth="200.0">
                      <children>
-                        <Label fx:id="user" alignment="CENTER" text="amir hosein hoseini" textAlignment="CENTER" textFill="#0075ff">
+                        <Label fx:id="user" alignment="CENTER" text="amir hosein hosseini" textAlignment="CENTER" textFill="#0075ff">
                            <font>
                               <Font size="35.0" />
                            </font>

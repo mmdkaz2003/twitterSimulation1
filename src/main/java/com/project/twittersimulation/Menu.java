@@ -6,15 +6,19 @@ import javafx.scene.Node;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.input.MouseEvent;
+import javafx.scene.layout.Pane;
 import javafx.stage.Stage;
 
 import java.io.IOException;
 
+import static com.project.twittersimulation.App.stage;
+import static com.project.twittersimulation.App.scene;
+
+
 
 public class Menu {
 
-    private Stage stage ;
-    private  Scene scene;
+
     
     public void logout(MouseEvent mouseEvent) {
     }
@@ -38,13 +42,10 @@ public class Menu {
     }
 
     public void viewProfile(ActionEvent event) throws IOException {
-        Profile profile = new Profile();
-        Parent root = FXMLLoader.load(getClass().getResource("profile.fxml"));
-        stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
+        Pane root = FXMLLoader.load(getClass().getResource("profile.fxml"));
         stage.setTitle("see your profile");
-        scene = new Scene(root);
-        stage.setScene(scene);
-        stage.show();
+        scene.setRoot(root);
+
     }
 
     public void followingsPost(MouseEvent mouseEvent) {
