@@ -21,9 +21,6 @@ public class App extends Application {
         stage.setWidth(800);
         stage.setHeight(600);
 
-        Login.scene = scene;
-        Login.stage = stage;
-
 
         stage.widthProperty().addListener((obs, oldVal, newVal) -> {
 

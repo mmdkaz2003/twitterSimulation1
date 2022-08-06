@@ -23,8 +23,11 @@ import java.util.ResourceBundle;
 
 public class Login {
 
-    public static Stage stage;
-    public static Scene scene;
+    private Stage stage;
+    private Scene scene;
+
+    public static String userName;
+    public static String password;
 
 
     @FXML
@@ -95,6 +98,10 @@ public class Login {
                         exist = true;
                         if (temp2.equals(passWord)) {
                             wrongUser.setText("Login successfully ");
+                            Login.userName = userName;
+                            password = passWord;
+                            GoToMenu(event);
+
                         } else {
                             wrongUser.setText("your password is wrong");
                         }
@@ -113,6 +120,8 @@ public class Login {
 
         catch(SQLException e){
             e.printStackTrace();
+        } catch (IOException e) {
+
         }
 
     }
@@ -122,6 +131,17 @@ public class Login {
         Parent root = FXMLLoader.load(getClass().getResource("forgotPassword.fxml"));
         stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
         stage.setTitle("forgot password");
+        scene = new Scene(root);
+        stage.setScene(scene);
+        stage.show();
+    }
+
+    public void GoToMenu(ActionEvent event) throws IOException{
+        Parent root = FXMLLoader.load(getClass().getResource("Menu.fxml"));
+        stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
+        stage.setTitle("welcome " + usernameField.getText().toString().trim());
+        stage.setHeight(800);
+        stage.setWidth(1200);
         scene = new Scene(root);
         stage.setScene(scene);
         stage.show();

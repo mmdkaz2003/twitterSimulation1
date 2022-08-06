@@ -4,6 +4,7 @@ module com.project.twittersimulation {
     requires java.sql;
 
 
+
     opens com.project.twittersimulation to javafx.fxml;
     exports com.project.twittersimulation;
 }
