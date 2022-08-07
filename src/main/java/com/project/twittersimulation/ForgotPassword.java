@@ -4,24 +4,21 @@ package com.project.twittersimulation;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
-import javafx.scene.Node;
-import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.control.TextField;
+import javafx.scene.layout.Pane;
 import javafx.stage.Stage;
 
 import java.io.IOException;
 import java.sql.*;
 
-import static com.project.twittersimulation.App.stage;
-import static com.project.twittersimulation.App.scene;
-
 
 public class ForgotPassword {
 
-
+    private Stage stage;
+    private Scene scene;
 
 
     @FXML
@@ -47,16 +44,14 @@ public class ForgotPassword {
 
     @FXML
     void BackToLogin(ActionEvent event) throws IOException {
-        Parent root = FXMLLoader.load(getClass().getResource("login.fxml"));
-        stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
-        stage.setTitle("welcome to rouzif 25 ");
-        scene.setRoot(root);
-        stage.setScene(scene);
-        stage.show();
+        Pane pane=null;
+        pane= FXMLLoader.load(getClass().getResource("Login.fxml"));
+        App.scene.setRoot(pane);
     }
 
     @FXML
     void ChangePassword(ActionEvent event ) {
+        wrongSecurity.setText("");
 
         final String DB_url = "jdbc:mysql://localhost/users?serverTimezone=UTC";
         final String username = "root";
@@ -118,13 +113,10 @@ public class ForgotPassword {
     }
 
     public void GotoChangePassword(ActionEvent event , String user) throws IOException {
-        Parent root = FXMLLoader.load(getClass().getResource("changePassword.fxml"));
-        stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
-        stage.setTitle("change password of " + user);
+        Pane pane=null;
+        pane= FXMLLoader.load(getClass().getResource("ChangePassword.fxml"));
         ChangePassword.userName = user;
-        scene.setRoot(root);
-        stage.setScene(scene);
-        stage.show();
+        App.scene.setRoot(pane);
     }
 
 

@@ -5,6 +5,12 @@ module com.project.twittersimulation {
 
 
 
-    opens com.project.twittersimulation to javafx.fxml;
+
+
+    exports com.project.twittersimulation.model;
+    opens com.project.twittersimulation.model to javafx.fxml;
+
+
     exports com.project.twittersimulation;
+    opens com.project.twittersimulation to javafx.fxml;
 }

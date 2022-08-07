@@ -1,30 +1,21 @@
 package com.project.twittersimulation;
 
 
+
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
-import javafx.scene.Node;
-import javafx.scene.Parent;
-import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.control.TextField;
-import javafx.scene.image.Image;
-import javafx.stage.Stage;
-
-
+import javafx.scene.layout.Pane;
 
 import java.io.IOException;
 import java.sql.*;
 
 public class ChangePassword {
 
-
-    private Stage stage;
-    private Scene scene;
     public static String userName;
-
 
     @FXML
     private Button backButton;
@@ -52,12 +43,9 @@ public class ChangePassword {
 
     @FXML
     void BackToLogin(ActionEvent event) throws IOException {
-        Parent root = FXMLLoader.load(getClass().getResource("login.fxml"));
-        stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
-        stage.setTitle("welcome to rouzif 25 ");
-        scene = new Scene(root);
-        stage.setScene(scene);
-        stage.show();
+        Pane pane=null;
+        pane= FXMLLoader.load(getClass().getResource("Login.fxml"));
+        App.scene.setRoot(pane);
     }
 
 
@@ -72,7 +60,7 @@ public class ChangePassword {
         String confirm = confirmField.getText().toString().trim();
 
 
-        if (userName.isEmpty() || confirm.isEmpty()) {
+        if (password.isEmpty() || confirm.isEmpty()) {
             wrongPassword.setText("please enter your data");
         }
         else if (!format(password)){

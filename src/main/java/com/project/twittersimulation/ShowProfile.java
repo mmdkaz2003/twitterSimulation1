@@ -1,24 +1,19 @@
 package com.project.twittersimulation;
 
+import com.project.twittersimulation.model.*;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
-import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
-import javafx.scene.Node;
-import javafx.scene.Parent;
-import javafx.scene.Scene;
 import javafx.scene.control.ComboBox;
 import javafx.scene.control.Label;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
 import javafx.scene.control.cell.PropertyValueFactory;
-import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.Pane;
-import javafx.stage.Stage;
 
 import java.io.IOException;
 import java.net.URL;
@@ -33,7 +28,7 @@ public class ShowProfile implements Initializable {
 
 
     public static String userName;
-    private   AccountType accountType;
+    private AccountType accountType;
     private BusinessType businessType;
 
 
@@ -44,7 +39,7 @@ public class ShowProfile implements Initializable {
     private Label businessType1;
 
     @FXML
-    private TableColumn<Posts , Integer> commentColumn;
+    private TableColumn<Posts, Integer> commentColumn;
 
     @FXML
     private TableColumn<Posts , String> contentColumn;
@@ -91,7 +86,7 @@ public class ShowProfile implements Initializable {
     @FXML
     void BackToHome(MouseEvent event) throws IOException {
         Pane root = FXMLLoader.load(getClass().getResource("Menu.fxml"));
-        stage.setTitle("welcome " + Login.userName);
+        stage.setTitle("welcome " + MenuController.userName);
         scene.setRoot(root);
         stage.setScene(scene);
     }
@@ -267,8 +262,13 @@ public class ShowProfile implements Initializable {
                 Posts posts = new Posts();
                 posts.setNumber(temp);
                 posts.setContent(resultSet3.getString("postContent"));
-                posts.setDate("postDate");
-                posts.setImage("Yes");
+                posts.setDate(resultSet3.getString("postDate"));
+                if (resultSet3.getString("imagePath") == null) {
+                    posts.setImage("No");
+                }
+                else {
+                    posts.setImage("Yes");
+                }
                 if (resultSet1.next()){
                     posts.setComment(resultSet1.getInt(1));
                 }

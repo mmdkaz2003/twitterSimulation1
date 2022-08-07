@@ -1,14 +1,12 @@
 package com.project.twittersimulation;
 
+import com.project.twittersimulation.model.Followers;
+import com.project.twittersimulation.model.Followings;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
-import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
-import javafx.scene.Node;
-import javafx.scene.Parent;
-import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.control.TableColumn;
@@ -16,7 +14,6 @@ import javafx.scene.control.TableView;
 import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.Pane;
-import javafx.stage.Stage;
 
 import java.io.IOException;
 import java.sql.*;
@@ -32,7 +29,7 @@ import static com.project.twittersimulation.App.scene;
 import static com.project.twittersimulation.App.stage;
 
 
-public class Profile implements Initializable {
+public class Profile extends MenuController implements Initializable {
 
 
 
@@ -45,7 +42,7 @@ public class Profile implements Initializable {
     private Label birth;
 
     @FXML
-    private TableColumn<Followers , String> followersColumn;
+    private TableColumn<Followers, String> followersColumn;
 
     @FXML
     private TableView<Followers> followersTable;
@@ -67,43 +64,6 @@ public class Profile implements Initializable {
 
 
 
-    @FXML
-    public void chat(MouseEvent mouseEvent) {
-    }
-
-    @FXML
-    public void recommendedPost(MouseEvent mouseEvent) {
-    }
-
-    @FXML
-    public void recommendsUser(MouseEvent mouseEvent) {
-    }
-
-    @FXML
-    public void createPost(MouseEvent mouseEvent) {
-    }
-
-    @FXML
-    public void exploreUser(MouseEvent mouseEvent) {
-    }
-
-    @FXML
-    public void explorePost(MouseEvent mouseEvent) {
-    }
-
-    @FXML
-    public void viewProfile(MouseEvent mouseEvent) {
-
-    }
-
-    @FXML
-    public void followingsPost(MouseEvent mouseEvent) {
-    }
-
-
-    @FXML
-    public void logout(MouseEvent mouseEvent) {
-    }
 
 
     @FXML
@@ -169,8 +129,8 @@ public class Profile implements Initializable {
         Followings.followingsList.clear();
         Followers.followersList.clear();
 
-        user.setText(Login.userName);
-        birth.setText("birth day : " + Login.birthDay);
+        user.setText(MenuController.userName);
+        birth.setText("birth day : " + MenuController.birthDay);
 
 
 
@@ -196,9 +156,9 @@ public class Profile implements Initializable {
             Statement statement2 = conn.createStatement();
 
 
-            String sql = "SELECT COUNT(sender) FROM posts WHERE sender = '" + Login.userName + "'";
-            String sql1 = "SELECT " + Login.userName + " FROM followings";
-            String sql2 = "SELECT " + Login.userName + " FROM followers";
+            String sql = "SELECT COUNT(sender) FROM posts WHERE sender = '" + MenuController.userName + "'";
+            String sql1 = "SELECT " + MenuController.userName + " FROM followings";
+            String sql2 = "SELECT " + MenuController.userName + " FROM followers";
 
 
             ResultSet resultSet = statement.executeQuery(sql);
@@ -212,21 +172,21 @@ public class Profile implements Initializable {
                 System.out.println("ridi");
             }
             while (resultSet1.next()) {
-                if (resultSet1.getString(Login.userName) != null) {
-                    Followers follower = new Followers(resultSet1.getString(Login.userName));
+                if (resultSet1.getString(MenuController.userName) != null) {
+                    Followers follower = new Followers(resultSet1.getString(MenuController.userName));
 
                     followersList.add(follower);
-                    Followers.followersList.add(resultSet1.getString(Login.userName));
-                    System.out.println(resultSet1.getString(Login.userName));
+                    Followers.followersList.add(resultSet1.getString(MenuController.userName));
+                    System.out.println(resultSet1.getString(MenuController.userName));
                 }
             }
             while (resultSet2.next()) {
-                if (resultSet2.getString(Login.userName) != null) {
-                    Followings following = new Followings(resultSet2.getString(Login.userName));
+                if (resultSet2.getString(MenuController.userName) != null) {
+                    Followings following = new Followings(resultSet2.getString(MenuController.userName));
 
                     followingsList.add(following);
-                    Followings.followingsList.add(resultSet2.getString(Login.userName));
-                    System.out.println(resultSet2.getString(Login.userName));
+                    Followings.followingsList.add(resultSet2.getString(MenuController.userName));
+                    System.out.println(resultSet2.getString(MenuController.userName));
                 }
             }
 

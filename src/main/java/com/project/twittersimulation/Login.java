@@ -1,36 +1,25 @@
 package com.project.twittersimulation;
 
 import java.io.IOException;
-import java.net.URL;
 import java.sql.*;
+import java.time.LocalDate;
 
+import com.project.twittersimulation.model.AccountType;
+import com.project.twittersimulation.model.BusinessAccount;
+import com.project.twittersimulation.model.NormalAccount;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
-import javafx.fxml.Initializable;
-import javafx.scene.Node;
-import javafx.scene.Parent;
-import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.control.PasswordField;
 import javafx.scene.control.TextField;
-import javafx.scene.control.TextField;
 import javafx.scene.layout.Pane;
-import javafx.stage.Stage;
-
-import java.util.ArrayList;
-import java.util.ResourceBundle;
 
 
 public class Login {
 
-    public static String userName;
-    public static String password;
-    public static String birthDay;
-    public static String name;
-    public static AccountType accountType;
-    public static BusinessType businessType;
+
 
 
     @FXML
@@ -100,25 +89,37 @@ public class Login {
                     if (temp1.equals(userName)) {
                         exist = true;
                         if (temp2.equals(passWord)) {
-
                             wrongUser.setText("Login successfully ");
 
-                            Login.userName = userName;
-                            password = passWord;
-                            birthDay = resultSet.getString("birthday").trim();
-                            accountType = AccountType.valueOf(resultSet.getString("accounttype").trim());
-                            if (accountType.equals(AccountType.BusinessAccount)){
-                                businessType = BusinessType.valueOf(resultSet.getString("businessType").trim());
+
+                            MenuController.password = passWord;
+                            MenuController.name=resultSet.getString("name");
+                            MenuController.userName=userName;
+
+                            if(resultSet.getString("accounttype").equals(AccountType.BusinessAccount.toString())){
+                                BusinessAccount businessAccount=new BusinessAccount(resultSet.getString("name"),resultSet.getString("username"),
+                                        resultSet.getString("password"),resultSet.getString("password"),
+                                        resultSet.getString("businessType"),resultSet.getInt("id"));
+                                MenuController.businessAccount=businessAccount;
+                                MenuController.normalAccount=null;
+
+                            }
+                            else{
+                                MenuController.birthDay = resultSet.getString("birthday").trim();
+                                NormalAccount normalAccount=new NormalAccount(resultSet.getString("name"),resultSet.getString("username"),
+                                        resultSet.getString("password"),resultSet.getString("password"),
+                                        LocalDate.parse(resultSet.getString("birthday")),resultSet.getInt("id"));
+                                MenuController.normalAccount=normalAccount;
+                                MenuController.businessAccount=null;
                             }
                             GoToMenu(event);
 
-                        } else {
+                        }
+                        else {
                             wrongUser.setText("your password is wrong");
                         }
                         break;
                     }
-
-
                 }
 
                 if (!exist) {
@@ -138,24 +139,23 @@ public class Login {
 
 
     public void Forgot(ActionEvent event) throws IOException {
-        Pane root = FXMLLoader.load(getClass().getResource("forgotPassword.fxml"));
-        App.stage.setTitle("forgot password");
-        App.scene.setRoot(root);
+        Pane pane=null;
+        pane= FXMLLoader.load(getClass().getResource("ForgotPassword.fxml"));
+        App.scene.setRoot(pane);
     }
 
     public void GoToMenu(ActionEvent event) throws IOException{
-        Pane root = FXMLLoader.load(getClass().getResource("Menu.fxml"));
-
-        App.stage.setTitle("welcome " + usernameField.getText().toString().trim());
-        App.stage.setHeight(800);
-        App.stage.setWidth(1200);
-        App.scene.setRoot(root);
-        App.stage.setScene(App.scene);
+        Pane pane=null;
+        pane= FXMLLoader.load(getClass().getResource("Menu.fxml"));
+        App.scene.setRoot(pane);
     }
 
 
 
-    public void Create(ActionEvent event) {
+    public void Create(ActionEvent event) throws IOException {
+        Pane pane=null;
+        pane= FXMLLoader.load(getClass().getResource("CreateAccount.fxml"));
+        App.scene.setRoot(pane);
     }
 
 
