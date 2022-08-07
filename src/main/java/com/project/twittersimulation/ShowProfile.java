@@ -185,8 +185,8 @@ public class ShowProfile implements Initializable {
 
             String sql0 = "SELECT * FROM personalInformation WHERE username = '" + userName + "'";
             String sql = "SELECT COUNT(sender) FROM posts WHERE sender = '" + userName + "'";
-            String sql1 = "SELECT * FROM followings";
-            String sql2 = "SELECT * FROM followers";
+            String sql1 = "SELECT "  + ShowProfile.userName + " FROM followers";
+            String sql2 = "SELECT "  + ShowProfile.userName + " FROM followings";
             String sql3 = "SELECT * FROM posts WHERE sender = '" + userName + "'";
 
 
@@ -229,7 +229,6 @@ public class ShowProfile implements Initializable {
                         Followers follower = new Followers(resultSet1.getString(userName));
 
                         followersList.add(follower);
-                        Followers.followersList.add(resultSet1.getString(userName));
                     }
                 }
 
@@ -239,7 +238,6 @@ public class ShowProfile implements Initializable {
                     Followings following = new Followings(resultSet2.getString(userName));
 
                     followingsList.add(following);
-                    Followings.followingsList.add(resultSet2.getString(userName));
 
                 }
             }

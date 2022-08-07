@@ -1,6 +1,14 @@
 package com.project.twittersimulation;
 
+import com.project.twittersimulation.model.Followers;
+import com.project.twittersimulation.model.Followings;
+import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
+import javafx.scene.control.Button;
+import javafx.scene.control.Label;
+import javafx.scene.control.TableColumn;
+import javafx.scene.control.TableView;
+import javafx.scene.input.MouseEvent;
 
 import java.net.URL;
 import java.sql.*;
@@ -10,19 +18,50 @@ import java.util.ResourceBundle;
 
 public class UserRecommend extends MenuController implements Initializable {
 
-    ArrayList<String> tempUsersName = new ArrayList<>();
-    ArrayList<Integer> tempUsersScore = new ArrayList<>();
+    ArrayList<String> usersName = new ArrayList<>();
+    ArrayList<Integer> usersScore = new ArrayList<>();
 
     final String DB_url = "jdbc:mysql://localhost/users?serverTimezone=UTC";
     final String username = "root";
     final String Password = "Smok2003@";
 
 
+    @FXML
+    private TableColumn<?, ?> accountColumn;
+
+    @FXML
+    private TableColumn<?, ?> birthColumn;
+
+    @FXML
+    private TableColumn<?, ?> businessColumn;
+
+    @FXML
+    private TableColumn<?, ?> numberColumn;
+
+    @FXML
+    private Button showProf;
+
+    @FXML
+    private TableColumn<?, ?> usernameColumn;
+
+    @FXML
+    private Label usernameLabel;
+
+    @FXML
+    private TableView<?> usersTable;
+
+
+    @FXML
+    void ShowProfile(MouseEvent event) {
+
+    }
+
+
 
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
-        Rating();;
-        selectionSort(tempUsersScore);
+        Rating();
+        selectionSort(usersScore);
 
 
     }
@@ -32,40 +71,16 @@ public class UserRecommend extends MenuController implements Initializable {
 
     private void Rating (){
 
-        ArrayList<String> followers = new ArrayList<>();
-        ArrayList<String> followings = new ArrayList<>();
-        try {
-            Connection conn = DriverManager.getConnection(DB_url, username, Password);
-            Statement statement1 = conn.createStatement();
-            String sql1 = "SELECT * FROM followings";
-            ResultSet resultSet1 = statement1.executeQuery(sql1);
-
-            while (resultSet1.next()){
-                if (resultSet1.getString(userName) != null){
-                    followings.add(resultSet1.getString(userName));
-                }
-            }
 
 
-            Statement statement2 = conn.createStatement();
-            String sql2 = "SELECT * FROM followers";
-            ResultSet resultSet2 = statement2.executeQuery(sql2);
+        for (Followers j : MenuController.followersList){
 
-            while (resultSet2.next()){
-                if (resultSet2.getString(userName) != null){
-                    followers.add(resultSet2.getString(userName));
-                    tempUsersName.add(resultSet2.getString(userName));
-                    tempUsersScore.add(3);
-                }
-            }
-
-
-        }
-        catch (SQLException e) {
-            e.printStackTrace();
+            usersName.add(j.getFollowerName());
+            usersScore.add(3);
         }
 
-        for (String i : followings) {
+        for (Followings j : MenuController.followingsList) {
+            String i = j.getFollowingName();
 
             try {
                 Connection conn = DriverManager.getConnection(DB_url, username, Password);
@@ -75,13 +90,13 @@ public class UserRecommend extends MenuController implements Initializable {
 
 
                 while (resultSet1.next()){
-                    if (resultSet1.getString(i) != null && !followings.contains(resultSet1.getString(i)) && !resultSet1.getString(i).equals(userName)){
-                        if (tempUsersName.contains(resultSet1.getString(i))){
-                            tempUsersScore.set(tempUsersName.indexOf(resultSet1.getString(i)) , tempUsersScore.get(tempUsersName.indexOf(resultSet1.getString(i))) + 5) ;
+                    if (resultSet1.getString(i) != null && !Followings.followingsList.contains(resultSet1.getString(i)) && !resultSet1.getString(i).equals(userName)){
+                        if (usersName.contains(resultSet1.getString(i))){
+                            usersScore.set(usersName.indexOf(resultSet1.getString(i)) , usersScore.get(usersName.indexOf(resultSet1.getString(i))) + 5) ;
                         }
                         else {
-                            tempUsersName.add(resultSet1.getString(i));
-                            tempUsersScore.add(5);
+                            usersName.add(resultSet1.getString(i));
+                            usersScore.add(5);
                         }
                     }
                 }
@@ -92,13 +107,13 @@ public class UserRecommend extends MenuController implements Initializable {
                 ResultSet resultSet2 = statement2.executeQuery(sql2);
 
                 while (resultSet2.next()){
-                    if (resultSet2.getString(i) != null && !followings.contains(resultSet2.getString(i)) && !resultSet2.getString(i).equals(userName)) {
-                        if (tempUsersName.contains(resultSet2.getString(i))) {
-                            tempUsersScore.set(tempUsersName.indexOf(resultSet2.getString(i)), tempUsersScore.get(tempUsersName.indexOf(resultSet2.getString(i))) + 4);
+                    if (resultSet2.getString(i) != null && !Followings.followingsList.contains(resultSet2.getString(i)) && !resultSet2.getString(i).equals(userName)) {
+                        if (usersName.contains(resultSet2.getString(i))) {
+                            usersScore.set(usersName.indexOf(resultSet2.getString(i)), usersScore.get(usersName.indexOf(resultSet2.getString(i))) + 4);
                         }
                         else {
-                            tempUsersName.add(resultSet2.getString(i));
-                            tempUsersScore.add(4);
+                            usersName.add(resultSet2.getString(i));
+                            usersScore.add(4);
                         }
                     }
                 }
@@ -110,7 +125,9 @@ public class UserRecommend extends MenuController implements Initializable {
             }
         }
 
-        for (String i : followers) {
+        for (Followers j : MenuController.followersList) {
+            String i = j.getFollowerName();
+
 
             try {
                 Connection conn = DriverManager.getConnection(DB_url, username, Password);
@@ -120,13 +137,13 @@ public class UserRecommend extends MenuController implements Initializable {
 
 
                 while (resultSet1.next()){
-                    if (resultSet1.getString(i) != null  && !followings.contains(resultSet1.getString(i)) && !resultSet1.getString(i).equals(userName)){
-                        if (tempUsersName.contains(resultSet1.getString(i))){
-                            tempUsersScore.set(tempUsersName.indexOf(resultSet1.getString(i)) , tempUsersScore.get(tempUsersName.indexOf(resultSet1.getString(i))) + 2) ;
+                    if (resultSet1.getString(i) != null  && !Followers.followersList.contains(resultSet1.getString(i)) && !resultSet1.getString(i).equals(userName)){
+                        if (usersName.contains(resultSet1.getString(i))){
+                            usersScore.set(usersName.indexOf(resultSet1.getString(i)) , usersScore.get(usersName.indexOf(resultSet1.getString(i))) + 2) ;
                         }
                         else {
-                            tempUsersName.add(resultSet1.getString(i));
-                            tempUsersScore.add(2);
+                            usersName.add(resultSet1.getString(i));
+                            usersScore.add(2);
                         }
                     }
                 }
@@ -137,14 +154,14 @@ public class UserRecommend extends MenuController implements Initializable {
                 ResultSet resultSet2 = statement2.executeQuery(sql2);
 
                 while (resultSet2.next()){
-                    if (resultSet2.getString(i) != null  && !followings.contains(resultSet2.getString(i)) && !resultSet2.getString(i).equals(userName)) {
+                    if (resultSet2.getString(i) != null  && !Followers.followersList.contains(resultSet2.getString(i)) && !resultSet2.getString(i).equals(userName)) {
 
-                        if (tempUsersName.contains(resultSet2.getString(i))) {
-                            tempUsersScore.set(tempUsersName.indexOf(resultSet2.getString(i)), tempUsersScore.get(tempUsersName.indexOf(resultSet2.getString(i))) + 1);
+                        if (usersName.contains(resultSet2.getString(i))) {
+                            usersScore.set(usersName.indexOf(resultSet2.getString(i)), usersScore.get(usersName.indexOf(resultSet2.getString(i))) + 1);
                         }
                         else {
-                            tempUsersName.add(resultSet2.getString(i));
-                            tempUsersScore.add(1);
+                            usersName.add(resultSet2.getString(i));
+                            usersScore.add(1);
                         }
                     }
                 }
@@ -180,9 +197,9 @@ public class UserRecommend extends MenuController implements Initializable {
             arr.set(i  ,temp1 );
 
 
-            temp2 = tempUsersName.get(pos);            //swap the current element with the minimum element
-            tempUsersName.set(pos , tempUsersName.get(i));
-            tempUsersName.set(i  ,temp2 );
+            temp2 = usersName.get(pos);            //swap the current element with the minimum element
+            usersName.set(pos , usersName.get(i));
+            usersName.set(i  ,temp2 );
 
 
         }

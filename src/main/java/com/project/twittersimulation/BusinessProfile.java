@@ -124,8 +124,6 @@ public class BusinessProfile extends MenuController implements Initializable {
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
 
-        Followings.followingsList.clear();
-        Followers.followersList.clear();
 
         user.setText(MenuController.userName);
         businessType.setText(MenuController.businessAccount.getBusinessType().toString());
@@ -137,31 +135,26 @@ public class BusinessProfile extends MenuController implements Initializable {
         followingsColumn.setCellValueFactory(new PropertyValueFactory<>("followingName"));
 
 
+        followersTable.setItems(FollowersList(followersList));
+        followingsTable.setItems(FollowingsList(followingsList));
+
 
         final String DB_url = "jdbc:mysql://localhost/users?serverTimezone=UTC";
         final String username = "root";
         final String Password = "Smok2003@";
 
-        ArrayList<Followers> followersList = new ArrayList<>();
-        ArrayList<Followings> followingsList = new ArrayList<>();
 
         try {
 
 
             Connection conn = DriverManager.getConnection(DB_url, username, Password);
             Statement statement = conn.createStatement();
-            Statement statement1 = conn.createStatement();
-            Statement statement2 = conn.createStatement();
-
 
             String sql = "SELECT COUNT(sender) FROM posts WHERE sender = '" + MenuController.userName + "'";
-            String sql1 = "SELECT " + MenuController.userName + " FROM followings";
-            String sql2 = "SELECT " + MenuController.userName + " FROM followers";
-
 
             ResultSet resultSet = statement.executeQuery(sql);
-            ResultSet resultSet1 = statement1.executeQuery(sql1);
-            ResultSet resultSet2 = statement2.executeQuery(sql2);
+
+
 
             if (resultSet.next()){
                 postCount.setText("number of post : " + resultSet.getInt(1));
@@ -169,28 +162,6 @@ public class BusinessProfile extends MenuController implements Initializable {
             else {
                 System.out.println("ridi");
             }
-            while (resultSet1.next()) {
-                if (resultSet1.getString(MenuController.userName) != null) {
-                    Followers follower = new Followers(resultSet1.getString(MenuController.userName));
-
-                    followersList.add(follower);
-                    Followers.followersList.add(resultSet1.getString(MenuController.userName));
-                    System.out.println(resultSet1.getString(MenuController.userName));
-                }
-            }
-            while (resultSet2.next()) {
-                if (resultSet2.getString(MenuController.userName) != null) {
-                    Followings following = new Followings(resultSet2.getString(MenuController.userName));
-
-                    followingsList.add(following);
-                    Followings.followingsList.add(resultSet2.getString(MenuController.userName));
-                    System.out.println(resultSet2.getString(MenuController.userName));
-                }
-            }
-
-            followersTable.setItems(FollowersList(followersList));
-            followingsTable.setItems(FollowingsList(followingsList));
-
 
         }
         catch (SQLException e) {
