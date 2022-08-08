@@ -156,12 +156,12 @@
                     <children>
                         <HBox alignment="TOP_CENTER" prefHeight="100.0" prefWidth="200.0">
                             <children>
-                                <Button fx:id="accountButton" mnemonicParsing="false" onAction="#Create" prefHeight="40.0" prefWidth="140.0" text="create accoount">
+                                <Button fx:id="accountButton" mnemonicParsing="false" onAction="#Create" prefHeight="40.0" prefWidth="170.0" text="create accoount">
                                     <HBox.margin>
                                         <Insets left="100.0" top="15.0" />
                                     </HBox.margin>
                                     <font>
-                                        <Font size="14.0" />
+                                        <Font size="18.0" />
                                     </font>
                                 </Button>
                             </children>
@@ -237,12 +237,12 @@
                     <children>
                         <HBox prefHeight="100.0" prefWidth="200.0" GridPane.columnIndex="1">
                             <children>
-                                <Button fx:id="forgotButton" mnemonicParsing="false" onAction="#Forgot" prefHeight="40.0" prefWidth="140.0" text="change password">
+                                <Button fx:id="forgotButton" mnemonicParsing="false" onAction="#Forgot" prefHeight="40.0" prefWidth="163.0" text="change password">
                                     <HBox.margin>
                                         <Insets left="100.0" top="15.0" />
                                     </HBox.margin>
                                     <font>
-                                        <Font size="14.0" />
+                                        <Font size="18.0" />
                                     </font>
                                 </Button>
                             </children>

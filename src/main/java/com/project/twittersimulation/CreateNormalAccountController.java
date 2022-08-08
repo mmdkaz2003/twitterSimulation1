@@ -57,7 +57,7 @@ public class CreateNormalAccountController {
                 try {
                     Connection conn = DriverManager.getConnection(DB_url, username, Password);
 
-                    String sql = "INSERT INTO personalInformation (name,username,password,securityQ,accounttype,birthday) VALUES (?,?,?,?,?,?)";
+                    String sql = "INSERT INTO personalInformation (name,username,password,securityQ,accounttype,birthday , theme) VALUES (?,?,?,?,?,?,"+ "classic" + ")";
                     PreparedStatement preparedStatement = conn.prepareStatement(sql);
                     preparedStatement.setString(1,name);
                     preparedStatement.setString(2, userName);

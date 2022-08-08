@@ -163,9 +163,32 @@
       <HBox alignment="CENTER" prefHeight="100.0" prefWidth="200.0" GridPane.rowIndex="2">
          <children>
             <Button mnemonicParsing="false" onMouseClicked="#ShowPosts" prefHeight="26.0" prefWidth="96.0" text="show post" />
-            <HBox alignment="CENTER_RIGHT" prefHeight="58.0" prefWidth="660.0">
+            <HBox alignment="CENTER_RIGHT" prefHeight="58.0" prefWidth="878.0">
                <children>
-                  <Button mnemonicParsing="false" onMouseClicked="#BackToHome" text="back home " />
+                  <HBox alignment="CENTER_RIGHT" prefHeight="58.0" prefWidth="306.0">
+                     <children>
+                        <Label fx:id="showPostLabel" prefHeight="26.0" prefWidth="391.0" text="please select a post" textFill="RED">
+                           <font>
+                              <Font size="20.0" />
+                           </font>
+                        </Label>
+                     </children>
+                  </HBox>
+                  <HBox alignment="CENTER_LEFT" prefHeight="58.0" prefWidth="496.0">
+                     <children>
+                        <Button fx:id="followButton" mnemonicParsing="false" onMouseClicked="#followOrUnFollow" text="unfollow" />
+                        <HBox alignment="CENTER" prefHeight="58.0" prefWidth="411.0">
+                           <children>
+                              <Label fx:id="followLabel" prefHeight="26.0" prefWidth="391.0" text="unfollow successfully :)" textFill="RED">
+                                 <font>
+                                    <Font size="20.0" />
+                                 </font>
+                              </Label>
+                           </children>
+                        </HBox>
+                     </children>
+                  </HBox>
+                  <Button mnemonicParsing="false" onMouseClicked="#BackToHome" prefHeight="26.0" prefWidth="113.0" text="back home " />
                </children>
             </HBox>
          </children>

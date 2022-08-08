@@ -17,8 +17,7 @@ import javafx.scene.control.TextField;
 import javafx.scene.layout.Pane;
 
 
-public class Login {
-
+public class Login  {
 
 
 
@@ -95,6 +94,11 @@ public class Login {
                             MenuController.password = passWord;
                             MenuController.name=resultSet.getString("name");
                             MenuController.userName=userName;
+                            MenuController.theme = resultSet.getString("theme");
+                            MenuController.security=resultSet.getString("securityQ");
+
+
+
 
                             if(resultSet.getString("accounttype").equals(AccountType.BusinessAccount.toString())){
                                 BusinessAccount businessAccount=new BusinessAccount(resultSet.getString("name"),resultSet.getString("username"),
@@ -145,6 +149,28 @@ public class Login {
     }
 
     public void GoToMenu(ActionEvent event) throws IOException{
+        String css1;
+        String css2;
+
+        if (MenuController.theme.equals("classic mode")){
+            App.scene.getStylesheets().clear();
+            css1 = this.getClass().getResource("/CSS/classicMode.css").toExternalForm();
+            css2 = this.getClass().getResource("/CSS/buttonColorClassic.css").toExternalForm();
+
+            App.scene.getStylesheets().add(css1);
+            App.scene.getStylesheets().add(css2);
+
+        }
+        else {
+            App.scene.getStylesheets().clear();
+            css1 = this.getClass().getResource("/CSS/darkMode.css").toExternalForm();
+            css2 = this.getClass().getResource("/CSS/buttonColorDark.css").toExternalForm();
+
+            App.scene.getStylesheets().add(css1);
+            App.scene.getStylesheets().add(css2);
+
+        }
+
         Pane pane=null;
         pane= FXMLLoader.load(getClass().getResource("Menu.fxml"));
         App.scene.setRoot(pane);

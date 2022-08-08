@@ -25,6 +25,8 @@ public class MenuController implements Initializable {
     public static String password;
     public static BusinessAccount businessAccount;
     public static NormalAccount normalAccount;
+    public static String theme;
+    public static String security;
     public static ArrayList<Followers> followersList = new ArrayList<>();
     public static ArrayList<Followings> followingsList = new ArrayList<>();
 
@@ -44,6 +46,7 @@ public class MenuController implements Initializable {
 
         }
         App.scene.setRoot(pane);
+        App.stage.setTitle("view profile");
     }
 
     public void explorePost(MouseEvent mouseEvent) throws IOException {
@@ -66,8 +69,9 @@ public class MenuController implements Initializable {
 
     public void recommendsdUser(MouseEvent mouseEvent) throws IOException {
         Pane pane = null;
-        pane = FXMLLoader.load(getClass().getResource("UserRecom.fxml"));
+        pane = FXMLLoader.load(getClass().getResource("userRecommend.fxml"));
         App.scene.setRoot(pane);
+        App.stage.setTitle("recommended user");
     }
 
     public void recommendedPost(MouseEvent mouseEvent) throws IOException {
@@ -83,6 +87,10 @@ public class MenuController implements Initializable {
     }
 
     public void logout(MouseEvent mouseEvent) throws IOException {
+        App.scene.getStylesheets().clear();
+        String css = this.getClass().getResource("/CSS/buttonColor.css").toExternalForm();
+        App.scene.getStylesheets().add(css);
+
         Pane pane = null;
         pane = FXMLLoader.load(getClass().getResource("Login.fxml"));
         App.scene.setRoot(pane);

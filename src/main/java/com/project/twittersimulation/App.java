@@ -22,10 +22,12 @@ public class App extends Application {
     public void start(Stage stage) throws IOException {
         Pane pane = FXMLLoader.load(getClass().getResource("Login.fxml"));
         scene = new Scene(pane, 1200, 800);
-        String scc= String.valueOf(this.getClass().getResource("/CSS/CreateAccount.css"));
-        scene.getStylesheets().add(scc);
-        String ali="1";
         stage.setTitle("Shwitter");
+
+        String css = this.getClass().getResource("/CSS/buttonColor.css").toExternalForm();
+        App.scene.getStylesheets().add(css);
+
+
         stage.setScene(scene);
         App.stage = stage;
         stage.show();

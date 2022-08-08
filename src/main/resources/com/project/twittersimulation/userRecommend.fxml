@@ -147,7 +147,7 @@
             </HBox>
             <HBox alignment="CENTER" prefHeight="100.0" prefWidth="200.0">
                <children>
-                  <Label fx:id="usernameLabel" alignment="CENTER" prefHeight="37.0" prefWidth="958.0" text="the recommended users for mohammmad" textFill="#00b2ff">
+                  <Label fx:id="usernameLabel" alignment="CENTER" prefHeight="37.0" prefWidth="958.0">
                      <font>
                         <Font size="30.0" />
                      </font>

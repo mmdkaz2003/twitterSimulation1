@@ -1,8 +1,199 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
-<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.ComboBox?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.image.Image?>
+<?import javafx.scene.image.ImageView?>
+<?import javafx.scene.layout.ColumnConstraints?>
+<?import javafx.scene.layout.GridPane?>
+<?import javafx.scene.layout.HBox?>
+<?import javafx.scene.layout.RowConstraints?>
+<?import javafx.scene.text.Font?>
 
-
-<AnchorPane prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/18" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.project.twittersimulation.EditProfile">
-
-</AnchorPane>
+<GridPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="800.0" prefWidth="1200.0" xmlns="http://javafx.com/javafx/18" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.project.twittersimulation.EditProfile">
+  <columnConstraints>
+    <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
+  </columnConstraints>
+  <rowConstraints>
+    <RowConstraints maxHeight="189.45263671875" minHeight="10.0" prefHeight="136.3389129638672" vgrow="SOMETIMES" />
+    <RowConstraints maxHeight="456.5388526916504" minHeight="10.0" prefHeight="285.0388488769531" vgrow="SOMETIMES" />
+    <RowConstraints maxHeight="486.2124328613281" minHeight="10.0" prefHeight="221.40948486328125" vgrow="SOMETIMES" />
+      <RowConstraints maxHeight="138.09051513671875" minHeight="10.0" prefHeight="138.09051513671875" vgrow="SOMETIMES" />
+  </rowConstraints>
+   <children>
+      <GridPane>
+        <columnConstraints>
+          <ColumnConstraints hgrow="SOMETIMES" maxWidth="593.6715698242188" minWidth="10.0" prefWidth="422.09783935546875" />
+          <ColumnConstraints hgrow="SOMETIMES" maxWidth="1067.2481536865234" minWidth="10.0" prefWidth="778.4021606445312" />
+        </columnConstraints>
+        <rowConstraints>
+          <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+        </rowConstraints>
+         <children>
+            <HBox alignment="CENTER" prefHeight="142.0" prefWidth="784.0" GridPane.columnIndex="1">
+               <children>
+                  <HBox alignment="CENTER" prefHeight="143.0" prefWidth="221.0">
+                     <children>
+                        <Button mnemonicParsing="false" onMouseClicked="#changeTheme" text="change theme" />
+                     </children>
+                  </HBox>
+                  <HBox alignment="CENTER" prefHeight="143.0" prefWidth="351.0">
+                     <children>
+                        <Label fx:id="wrongTheme">
+                           <font>
+                              <Font size="20.0" />
+                           </font>
+                        </Label>
+                     </children>
+                  </HBox>
+                  <ComboBox fx:id="themeCombo" prefWidth="150.0" promptText="theme" />
+               </children>
+            </HBox>
+            <HBox prefHeight="100.0" prefWidth="200.0">
+               <children>
+                  <ImageView fitHeight="173.0" fitWidth="294.0" pickOnBounds="true" preserveRatio="true">
+                     <image>
+                        <Image url="@../../../../../../../../../../Desktop/wallpapers/wallpaper2.jpeg" />
+                     </image>
+                  </ImageView>
+               </children>
+            </HBox>
+         </children>
+      </GridPane>
+      <GridPane GridPane.rowIndex="1">
+        <columnConstraints>
+          <ColumnConstraints hgrow="SOMETIMES" maxWidth="594.726318359375" minWidth="10.0" prefWidth="557.810546875" />
+          <ColumnConstraints hgrow="SOMETIMES" maxWidth="642.189453125" minWidth="10.0" prefWidth="642.189453125" />
+        </columnConstraints>
+        <rowConstraints>
+          <RowConstraints maxHeight="124.86102294921875" minHeight="10.0" prefHeight="75.15682983398438" vgrow="SOMETIMES" />
+          <RowConstraints maxHeight="146.56524658203125" minHeight="10.0" prefHeight="72.84317016601562" vgrow="SOMETIMES" />
+            <RowConstraints maxHeight="157.02096557617188" minHeight="10.0" prefHeight="87.29580688476562" vgrow="SOMETIMES" />
+            <RowConstraints maxHeight="157.02096557617188" minHeight="10.0" prefHeight="39.17584228515625" vgrow="SOMETIMES" />
+        </rowConstraints>
+         <children>
+            <HBox alignment="CENTER" prefHeight="100.0" prefWidth="200.0" GridPane.rowIndex="1">
+               <children>
+                  <Label fx:id="passwordConfirmLabel" text="new password  confirmation: ">
+                     <font>
+                        <Font size="30.0" />
+                     </font>
+                  </Label>
+               </children>
+            </HBox>
+            <HBox alignment="CENTER" prefHeight="100.0" prefWidth="200.0">
+               <children>
+                  <Label fx:id="passwordLabel" text="new password : ">
+                     <font>
+                        <Font size="30.0" />
+                     </font>
+                  </Label>
+               </children>
+            </HBox>
+            <HBox alignment="CENTER" prefHeight="100.0" prefWidth="200.0" GridPane.columnIndex="1" GridPane.rowIndex="1">
+               <children>
+                  <TextField fx:id="passwordConfirmField" prefHeight="26.0" prefWidth="379.0" promptText="confirmation" />
+               </children>
+            </HBox>
+            <HBox alignment="CENTER" prefHeight="100.0" prefWidth="200.0" GridPane.columnIndex="1">
+               <children>
+                  <TextField fx:id="passwordField" prefHeight="26.0" prefWidth="379.0" promptText="password" />
+               </children>
+            </HBox>
+            <HBox prefHeight="100.0" prefWidth="200.0" GridPane.rowIndex="2" />
+            <HBox alignment="CENTER" prefHeight="100.0" prefWidth="200.0" GridPane.columnIndex="1" GridPane.rowIndex="2">
+               <children>
+                  <Button mnemonicParsing="false" onMouseClicked="#ChangePass" text="change password" />
+               </children>
+            </HBox>
+            <HBox alignment="CENTER" prefHeight="100.0" prefWidth="200.0" GridPane.columnIndex="1" GridPane.rowIndex="3">
+               <children>
+                  <Label fx:id="wrongPassword" alignment="CENTER" text="your password and its confiration aren't same" textFill="RED">
+                     <font>
+                        <Font size="20.0" />
+                     </font>
+                  </Label>
+               </children>
+            </HBox>
+         </children>
+      </GridPane>
+      <GridPane GridPane.rowIndex="2">
+         <columnConstraints>
+            <ColumnConstraints hgrow="SOMETIMES" maxWidth="594.726318359375" minWidth="10.0" prefWidth="557.810546875" />
+            <ColumnConstraints hgrow="SOMETIMES" maxWidth="642.189453125" minWidth="10.0" prefWidth="642.189453125" />
+         </columnConstraints>
+         <rowConstraints>
+            <RowConstraints maxHeight="124.86102294921875" minHeight="10.0" prefHeight="75.15682983398438" vgrow="SOMETIMES" />
+            <RowConstraints maxHeight="146.56524658203125" minHeight="10.0" prefHeight="72.84317016601562" vgrow="SOMETIMES" />
+            <RowConstraints maxHeight="157.02096557617188" minHeight="10.0" prefHeight="87.29580688476562" vgrow="SOMETIMES" />
+            <RowConstraints maxHeight="157.02096557617188" minHeight="10.0" prefHeight="39.17584228515625" vgrow="SOMETIMES" />
+         </rowConstraints>
+         <children>
+            <HBox alignment="CENTER" prefHeight="100.0" prefWidth="200.0" GridPane.rowIndex="1">
+               <children>
+                  <Label fx:id="securityNewLabel" text="security question new : ">
+                     <font>
+                        <Font size="30.0" />
+                     </font>
+                  </Label>
+               </children>
+            </HBox>
+            <HBox alignment="CENTER" prefHeight="100.0" prefWidth="200.0">
+               <children>
+                  <Label fx:id="securityOldLabel" text="security question old : ">
+                     <font>
+                        <Font size="30.0" />
+                     </font>
+                  </Label>
+               </children>
+            </HBox>
+            <HBox alignment="CENTER" prefHeight="100.0" prefWidth="200.0" GridPane.columnIndex="1" GridPane.rowIndex="1">
+               <children>
+                  <TextField fx:id="securityNewField" prefHeight="26.0" prefWidth="379.0" promptText="who is your favourite famous person now ? " />
+               </children>
+            </HBox>
+            <HBox alignment="CENTER" prefHeight="100.0" prefWidth="200.0" GridPane.columnIndex="1">
+               <children>
+                  <TextField fx:id="securityOldField" prefHeight="26.0" prefWidth="379.0" promptText="who was your favourite famous person ? " />
+               </children>
+            </HBox>
+            <HBox prefHeight="100.0" prefWidth="200.0" GridPane.rowIndex="2" />
+            <HBox alignment="CENTER" prefHeight="100.0" prefWidth="200.0" GridPane.columnIndex="1" GridPane.rowIndex="2">
+               <children>
+                  <Button mnemonicParsing="false" onMouseClicked="#ChangeSecurity" text="change security question" />
+               </children>
+            </HBox>
+            <HBox alignment="CENTER" prefHeight="100.0" prefWidth="200.0" GridPane.columnIndex="1" GridPane.rowIndex="3">
+               <children>
+                  <Label fx:id="wrongQ" alignment="CENTER" text="your password and its confiration aren't same" textFill="RED">
+                     <font>
+                        <Font size="20.0" />
+                     </font>
+                  </Label>
+               </children>
+            </HBox>
+         </children>
+      </GridPane>
+      <GridPane GridPane.rowIndex="3">
+        <columnConstraints>
+          <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
+        </columnConstraints>
+        <rowConstraints>
+          <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+        </rowConstraints>
+         <children>
+            <HBox alignment="CENTER" prefHeight="100.0" prefWidth="200.0">
+               <children>
+                  <Button mnemonicParsing="false" onMouseClicked="#BackViewProfile" text="back view profile">
+                     <font>
+                        <Font size="20.0" />
+                     </font>
+                  </Button>
+               </children>
+            </HBox>
+         </children>
+      </GridPane>
+   </children>
+</GridPane>

@@ -60,7 +60,7 @@ public class CreateBusinessAccountController implements Initializable {
                 try {
                     Connection conn = DriverManager.getConnection(DB_url, username, Password);
 
-                    String sql = "INSERT INTO personalInformation (name,username,password,securityQ,accounttype,businessType) VALUES (?,?,?,?,?,?)";
+                    String sql = "INSERT INTO personalInformation (name,username,password,securityQ,accounttype,businessType , theme) VALUES (?,?,?,?,?,? , " + "classic" +")";
                     PreparedStatement preparedStatement = conn.prepareStatement(sql);
                     preparedStatement.setString(1,name);
                     preparedStatement.setString(2, userName);
